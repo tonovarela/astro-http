@@ -18,7 +18,6 @@ export const GET: APIRoute = async ({ params, request }) => {
     return new Response(JSON.stringify(post),
         { status: 200, headers: { 'Content-Type': 'application/json' } });
 }
-
 export const POST: APIRoute = async ({ params, request }) => {
     return new Response(JSON.stringify({ message: 'Not implemented POST' }));
 }

@@ -11,7 +11,7 @@ export const GET: APIRoute = async ({ params, request }) => {
         return new Response(JSON.stringify(blogs),
             { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
-    const post = blogs.find((post) => post.slug === slug);
+    const post = blogs.find((post:any) => post.slug === slug);
     if (!post) {
         return new Response(JSON.stringify({ message: 'Not found' }),
             { status: 404, headers: { 'Content-Type': 'application/json' } });
@@ -22,3 +22,5 @@ export const GET: APIRoute = async ({ params, request }) => {
 
 
 }
+
+
