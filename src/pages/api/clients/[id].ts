@@ -33,7 +33,7 @@ export const DELETE: APIRoute = async ({ params, request }) => {
 
 export const PATCH: APIRoute = async ({ params, request }) => {
     const client = await  searchClientByID(+params.id!);
-    if (!client){
+    if (client.length === 0){
         return new Response(JSON.stringify({ error: "Client not found" }),{ status: 404, headers: { 'Content-Type': 'application/json' } });
     }
     const {id,...body} = await request.json();    
