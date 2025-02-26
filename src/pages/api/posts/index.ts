@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async ({ params, request }) => {    
     const blogs = await getCollection("blog");
     const url = new URL(request.url);
     const slug = url.searchParams.get('slug');

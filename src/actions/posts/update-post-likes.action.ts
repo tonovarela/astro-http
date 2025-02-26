@@ -1,21 +1,35 @@
+import prisma from "@db";
 import { defineAction } from "astro:actions";
-import { db, eq, Posts } from "astro:db";
+//import { db, eq, Posts } from "astro:db";
 import { z } from "zod";
 
-export const updatePostLikes =  defineAction({
+export const updatePostLikes = defineAction({
     accept: "json",
     input: z.object({
         postId: z.string(),
         likes: z.number(),
     }),
-    handler: async ({postId,likes},) => {                         
-    const posts = await db.select()
-                            .from(Posts)
-            .where(eq(Posts.id, postId));        
-        await db.update(Posts).set({ likes: posts[0].likes + likes }).where(eq(Posts.id, postId));        
-        return  {
-            post:posts[0],
+    handler: async ({ postId, likes },) => {
+        const post = await prisma.post.update({
+            where: {
+                id: postId,
+            },
+            data: {
+                likes: {
+                    increment: likes,
+                },
+            },
+        });
+        
+
+
+        //   const posts = await db.select()
+        //                         .from(Posts)
+        //         .where(eq(Posts.id, postId));        
+        //     await db.update(Posts).set({ likes: posts[0].likes + likes }).where(eq(Posts.id, postId));        
+        return {
+            post: post,
         };
 
     }
-  });
+});

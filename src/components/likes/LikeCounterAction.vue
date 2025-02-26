@@ -33,7 +33,7 @@ const likeClicks = ref(0);
 const isLoading = ref(false);
 const buttonRef = ref<HTMLElement | null>(null);
 
-const debounceLike = debounce(async()=> {
+const debounceLike = debounce(async()=> {    
     await actions.updatePostLikes({
         postId: props.postId,
         likes: likeClicks.value
